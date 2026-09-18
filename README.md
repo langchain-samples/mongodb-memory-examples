@@ -5,6 +5,17 @@ and when to reach for a **knowledge graph** instead. Built with
 [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) and
 [LangGraph](https://docs.langchain.com/oss/python/langgraph/persistence).
 
+## What's in this repo
+
+| File | What it is | Example it contains |
+|------|------------|---------------------|
+| `deep_agents_mongodb.ipynb` | **Deep Agents** trading-desk copilot (notebook). | The MongoDB-backed Deep Agent. Demonstrates **Pattern 1 — MongoDB as a filesystem** (§1.2: `MongoDBStore` mounted via `CompositeBackend` into `/compliance`, `/guidelines`, `/profile`; retrieval by `ls`/`read_file`/`grep`) and **Pattern 2 — MongoDB + Atlas Vector Search** (§1.3: a `$vectorSearch` trade journal exposed as the `search_trade_history` tool). Also shows middleware, read-only compliance, and skills. |
+| `langgraph_mongodb_store.py` | **Plain LangGraph** agent (runnable script). | Mongo-backed memory the LangGraph way: `MongoDBStore` for long-term, cross-thread memory + `MongoDBSaver` (checkpointer) for short-term, per-thread state. Shows manual `store.put` / `store.search` in a graph node — the contrast to Deep Agents mounting the store as a filesystem for you. |
+| `README.md` | This guide. | The decision chart, when-to-use-what, and doc links. |
+| `pyproject.toml` / `uv.lock` | uv project + pinned lockfile. | Dependencies for `uv sync` / `uv run`. |
+| `requirements.txt` | pip dependency list. | Same deps for `pip install -r`. |
+| `.env.example` | Environment template. | Copy to `.env` and fill in MongoDB creds (`.env` is gitignored). |
+
 ## The three patterns
 
 | # | Pattern | What it's for | Needs Atlas? | Example here |
