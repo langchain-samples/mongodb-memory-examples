@@ -1,0 +1,31 @@
+# Memory-pattern examples: Deep Agents + LangGraph over MongoDB.
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements.txt
+
+# Notebook runtime (for deep_agents_mongodb.ipynb)
+jupyter>=1.1.1
+notebook>=7.4.7
+ipywidgets>=8.1.0
+
+# LangChain / LangGraph / Deep Agents
+langchain>=1.4
+langchain-core>=1.6
+langgraph>=1.2
+langsmith>=0.12
+deepagents>=0.7.15
+
+# Model + embedding providers
+langchain-openai>=1.0.1
+langchain-huggingface[full]>=1.0   # local MiniLM embeddings for Atlas vector search
+
+# MongoDB persistence
+pymongo>=4.9,<4.17
+langgraph-store-mongodb>=0.4.0        # MongoDBStore  (long-term, cross-thread memory)
+langgraph-checkpoint-mongodb>=0.5.0   # MongoDBSaver  (short-term, per-thread state)
+
+# Config
+python-dotenv>=1.1.1
+
+# --- Optional: notebook's production VFS section (S3-backed searchable filesystem) ---
+# langchain-mongodb-deepagents-vfs>=0.1.0
+# boto3>=1.34
