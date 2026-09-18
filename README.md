@@ -145,6 +145,11 @@ The LangGraph example uses **two MongoDB-backed layers** (see [persistence](http
 - **`MongoDBSaver`** (checkpointer) → short-term, *thread-scoped* conversation state
 - **`MongoDBStore`** (store) → long-term, *cross-thread* memory
 
+> The checkpointer is **pluggable**. This example puts both layers on MongoDB, but you can
+> use **Redis** for short-term (keeping `MongoDBStore` for long-term) via
+> [`langgraph-checkpoint-redis`](https://pypi.org/project/langgraph-checkpoint-redis/):
+> `from langgraph.checkpoint.redis import RedisSaver`.
+
 ```python
 store = MongoDBStore(collection=mongo[DB]["memories"])   # long-term, cross-thread
 checkpointer = MongoDBSaver(mongo, db_name=DB)            # short-term, per-thread

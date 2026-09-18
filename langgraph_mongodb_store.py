@@ -21,6 +21,9 @@ Two persistence layers, both on MongoDB here:
   MongoDBSaver (checkpointer) -> short-term, thread-scoped conversation state
   MongoDBStore (store)        -> long-term, cross-thread memory (survives new threads)
 
+The checkpointer is pluggable: you can use Redis for short-term (keeping MongoDBStore for
+long-term) via `langgraph-checkpoint-redis` — see the note by the checkpointer below.
+
 Docs:
   Persistence:  https://docs.langchain.com/oss/python/langgraph/persistence
   Stores:       https://docs.langchain.com/oss/python/langgraph/stores
@@ -74,6 +77,10 @@ mongo = MongoClient(MONGODB_URI)
 store = MongoDBStore(collection=mongo[DB_NAME]["memories"])
 
 # Short-term, per-thread conversation state.
+# The checkpointer is pluggable — to use Redis for short-term instead (while keeping
+# MongoDBStore for long-term), pip install langgraph-checkpoint-redis and swap in:
+#     from langgraph.checkpoint.redis import RedisSaver
+#     checkpointer = RedisSaver.from_conn_string("redis://localhost:6379")  # context manager; .setup() once
 checkpointer = MongoDBSaver(mongo, db_name=DB_NAME)
 
 model = init_chat_model(MODEL)
