@@ -19,7 +19,7 @@ dependencies = [
     "langchain-openai>=1.0.1",
     "langchain-huggingface[full]>=1.0",
     # MongoDB persistence
-    "pymongo>=4.9,<4.17",
+    "pymongo>=4.9,<4.19",
     "langgraph-store-mongodb>=0.4.0",
     "langgraph-checkpoint-mongodb>=0.5.0",
     # Config
